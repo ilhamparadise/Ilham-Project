@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Perumahan Alam Asri Karawang (ALSKAR) – Kawasan hunian hijau terpadu modern untuk keluarga muda dan profesional urban di Karawang." />
+  <title>ALSKAR – Perumahan Alam Asri Karawang</title>
+  <style>
+    /* ===========================
+       CSS VARIABLES & RESET
+    =========================== */
+    :root {
+      --color-primary:      #2d7a4f;
+      --color-primary-dark: #1f5a38;
+      --color-primary-light:#e8f5ee;
+      --color-accent:       #f4b942;
+      --color-bg:           #ffffff;
+      --color-surface:      #f7f9f7;
+      --color-border:       #d6e4db;
+      --color-text:         #1a2b22;
+      --color-text-muted:   #4a6158;
+      --color-white:        #ffffff;
+      --color-danger:       #c0392b;
+
+      --font-base: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+      --radius:    10px;
+      --radius-lg: 18px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,.08);
+      --shadow-md: 0 6px 24px rgba(0,0,0,.12);
+      --transition: .22s ease;
+      --max-w: 1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-base);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--color-text);
+      background: var(--color-bg);
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { color: inherit; text-decoration: none; }
+    ul  { list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: var(--color-primary-light);
+      padding: .3em .9em;
+      border-radius: 999px;
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      color: var(--color-text);
+      line-height: 1.2;
+      margin-bottom: .6rem;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 560px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .72em 1.6em;
+      border-radius: var(--radius);
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+    .btn-primary:hover { background: var(--color-primary-dark); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+    .btn-outline:hover { background: var(--color-primary); color: var(--color-white); }
+    .btn-accent {
+      background: var(--color-accent);
+      color: var(--color-text);
+    }
+    .btn-accent:hover { background: #d9a030; transform: translateY(-1px); }
+
+    /* ===========================
+       NAVBAR
+    =========================== */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: var(--shadow-md); }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--color-primary-dark);
+      letter-spacing: -.02em;
+    }
+    .nav-logo .logo-icon {
+      width: 38px; height: 38px;
+      background: var(--color-primary);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+    }
+    .nav-logo .logo-icon svg { width: 22px; height: 22px; fill: #fff; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: .15rem;
+    }
+    .nav-links a {
+      padding: .45em .85em;
+      border-radius: var(--radius);
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+
+    .nav-cta { margin-left: .75rem; }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: .5rem;
+      border-radius: var(--radius);
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2.5px;
+      background: var(--color-text);
+      border-radius: 99px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+      padding: .75rem 1.25rem 1.25rem;
+      gap: .25rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: .65em 1em;
+      border-radius: var(--radius);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: background var(--transition), color var(--transition);
+    }
+    .mobile-menu a:hover { background: var(--color-primary-light); color: var(--color-primary); }
+    .mobile-menu .btn { margin-top: .5rem; width: 100%; justify-content: center; }
+
+    /* ===========================
+       HERO SECTION
+    =========================== */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f3d22 0%, #1a5c34 45%, #2d8a52 100%);
+    }
+
+    /* Decorative SVG leaf pattern */
+    #hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 75% 30%, rgba(255,255,255,.05) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cellipse cx='60' cy='60' rx='30' ry='50' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-size: auto, 120px 120px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding-block: 6rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      color: #b4e8c8;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .4em 1em;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      width: fit-content;
+    }
+    .hero-badge::before {
+      content: "";
+      width: 8px; height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(1.4); }
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 900;
+      color: var(--color-white);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.1rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: #86efac;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.78);
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+    }
+    .hero-actions .btn-outline {
+      color: rgba(255,255,255,.9);
+      border-color: rgba(255,255,255,.45);
+    }
+    .hero-actions .btn-outline:hover {
+      background: rgba(255,255,255,.15);
+      color: #fff;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .hero-stat-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--color-white);
+    }
+    .hero-stat-label {
+      font-size: .8rem;
+      color: rgba(255,255,255,.6);
+    }
+
+    /* Hero visual card */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .hero-card-title {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #a7f3d0;
+      margin-bottom: 1rem;
+    }
+
+    .hero-card-item {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      padding: .8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .hero-card-item:last-child { border-bottom: none; }
+
+    .hero-card-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,.12);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .hero-card-icon svg { width: 20px; height: 20px; fill: #86efac; }
+
+    .hero-card-name { font-size: .92rem; font-weight: 700; color: #fff; }
+    .hero-card-desc { font-size: .8rem; color: rgba(255,255,255,.6); }
+
+    /* ===========================
+       UNIT TYPES SECTION
+    =========================== */
+    #tipe-unit {
+      padding-block: 5rem;
+      background: var(--color-bg);
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .unit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .unit-card {
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .unit-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+
+    .unit-card.featured {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 1px var(--color-primary);
+    }
+
+    .unit-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--color-accent);
+      color: var(--color-text);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .28em .8em;
+      border-radius: 999px;
+    }
+
+    .unit-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #c8e6d5 0%, #a8d5b8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* SVG House Illustration */
+    .unit-illustration svg {
+      width: 120px;
+      height: 90px;
+    }
+
+    .unit-body { padding: 1.5rem; }
+
+    .unit-type-label {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: .4rem;
+    }
+
+    .unit-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--color-text);
+      margin-bottom: .25rem;
+    }
+
+    .unit-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 1.1rem;
+    }
+    .unit-price small { font-size: .8rem; font-weight: 500; color: var(--color-text-muted); }
+
+    .unit-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .55rem .4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .85rem;
+      color: var(--color-text-muted);
+    }
+    .spec-item svg { width: 16px; height: 16px; fill: var(--color-primary); flex-shrink: 0; }
+
+    .unit-actions { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .unit-actions .btn { flex: 1; min-width: 120px; justify-content: center; font-size: .88rem; }
+
+    /* Detail Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,.55);
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      animation: modalIn .2s ease;
+    }
+    @keyframes modalIn { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--color-surface);
+      border: none;
+      border-radius: 50%;
+      width: 34px; height: 34px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: var(--color-text-muted);
+      transition: background var(--transition);
+    }
+    .modal-close:hover { background: var(--color-border); }
+
+    .modal-title { font-size: 1.4rem; font-weight: 800; margin-bottom: .3rem; }
+    .modal-price { font-size: 1rem; font-weight: 700; color: var(--color-primary-dark); margin-bottom: 1.25rem; }
+
+    .modal-spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal-spec-item {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      padding: .75rem 1rem;
+    }
+    .modal-spec-item .label { font-size: .78rem; color: var(--color-text-muted); margin-bottom: .2rem; }
+    .modal-spec-item .value { font-size: .98rem; font-weight: 700; }
+
+    .modal-desc { font-size: .92rem; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .modal-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .modal-actions .btn { flex: 1; min-width: 140px; justify-content: center; }
+
+    /* ===========================
+       FASILITAS SECTION
+    =========================== */
+    #fasilitas {
+      padding-block: 5rem;
+      background: var(--color-surface);
+    }
+
+    .fasilitas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .fasilitas-card {
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: default;
+    }
+    .fasilitas-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+    }
+
+    .fasilitas-icon {
+      width: 60px; height: 60px;
+      background: var(--color-primary-light);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 1rem;
+      transition: background var(--transition);
+    }
+    .fasilitas-card:hover .fasilitas-icon { background: var(--color-primary); }
+    .fasilitas-icon svg { width: 28px; height: 28px; fill: var(--color-primary); transition: fill var(--transition); }
+    .fasilitas-card:hover .fasilitas-icon svg { fill: #fff; }
+
+    .fasilitas-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+    .fasilitas-desc { font-size: .85rem; color: var(--color-text-muted); line-height: 1.55; }
+
+    /* Location advantage strip */
+    .location-strip {
+      margin-top: 3rem;
+      background: var(--color-primary-dark);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .location-strip-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      flex: 0 0 auto;
+    }
+    .location-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      flex: 1;
+    }
+    .location-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(255,255,255,.1);
+      border-radius: var(--radius);
+      padding: .4em 1em;
+      font-size: .85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
+    }
+    .location-item svg { width: 14px; height: 14px; fill: #86efac; }
+
+    /* ===========================
+       KPR CALCULATOR SECTION
+    =========================== */
+    #simulasi-kpr {
+      padding-block: 5rem;
+      background: var(--color-bg);
+    }
+
+    .kpr-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .kpr-form-box {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: .45rem;
+      color: var(--color-text);
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: .72em 1em;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      font-size: .95rem;
+      font-family: inherit;
+      color: var(--color-text);
+      background: var(--color-bg);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(45,122,79,.15);
+    }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix .prefix {
+      position: absolute;
+      left: 1em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 3.4em; }
+
+    .kpr-result-box {
+      background: var(--color-primary-dark);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      color: #fff;
+      position: sticky;
+      top: 80px;
+    }
+
+    .kpr-result-label {
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #a7f3d0;
+      margin-bottom: .5rem;
+    }
+
+    .kpr-result-main {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: .35rem;
+    }
+
+    .kpr-result-sub {
+      font-size: .85rem;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 1.75rem;
+    }
+
+    .kpr-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .kpr-breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .88rem;
+    }
+    .kpr-breakdown-item .item-label { color: rgba(255,255,255,.65); }
+    .kpr-breakdown-item .item-value { font-weight: 700; }
+
+    .kpr-disclaimer {
+      margin-top: 1.25rem;
+      padding: .9rem 1.1rem;
+      background: rgba(255,255,255,.08);
+      border-left: 3px solid var(--color-accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: .78rem;
+      color: rgba(255,255,255,.7);
+      line-height: 1.55;
+    }
+    .kpr-disclaimer strong { color: var(--color-accent); }
+
+    /* ===========================
+       CONTACT & FORM SECTION
+    =========================== */
+    #kontak {
+      padding-block: 5rem;
+      background: var(--color-surface);
+    }
+
+    .kontak-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .kontak-info-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    .kontak-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .kontak-item-icon {
+      width: 44px; height: 44px;
+      background: var(--color-primary-light);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .kontak-item-icon svg { width: 20px; height: 20px; fill: var(--color-primary); }
+    .kontak-item-title { font-size: .82rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: .2rem; }
+    .kontak-item-value { font-size: .95rem; font-weight: 600; }
+
+    .kontak-hours {
+      margin-top: 1.5rem;
+      padding: 1rem 1.2rem;
+      background: var(--color-primary-light);
+      border-radius: var(--radius);
+      font-size: .88rem;
+    }
+    .kontak-hours strong { color: var(--color-primary-dark); }
+
+    /* Survey form */
+    .survey-form-box {
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    .survey-form-title { font-size: 1.2rem; font-weight: 800; margin-bottom: .35rem; }
+    .survey-form-sub { font-size: .88rem; color: var(--color-text-muted); margin-bottom: 1.5rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group textarea {
+      width: 100%;
+      padding: .72em 1em;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      font-size: .95rem;
+      font-family: inherit;
+      color: var(--color-text);
+      background: var(--color-bg);
+      resize: vertical;
+      min-height: 90px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(45,122,79,.15);
+    }
+
+    .form-success {
+      display: none;
+      background: var(--color-primary-light);
+      border: 1.5px solid var(--color-primary);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      margin-top: 1rem;
+      align-items: center;
+      gap: .5rem;
+    }
+    .form-success.show { display: flex; }
+    .form-success svg { width: 18px; height: 18px; fill: var(--color-primary); flex-shrink: 0; }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: #0f3d22;
+      color: rgba(255,255,255,.7);
+      padding-block: 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: .85rem;
+      color: rgba(255,255,255,.6);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: #fff; }
+
+    .footer-copy { font-size: .78rem; margin-top: 1.25rem; text-align: center; border-top: 1px solid rgba(255,255,255,.1); padding-top: 1rem; }
+
+    /* ===========================
+       WHATSAPP FLOATING BUTTON
+    =========================== */
+    .wa-float {
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      z-index: 800;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      background: #25d366;
+      color: #fff;
+      padding: .75em 1.35em .75em .9em;
+      border-radius: 999px;
+      font-size: .9rem;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(37,211,102,.45);
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,.55); }
+    .wa-float svg { width: 22px; height: 22px; fill: #fff; }
+
+    /* ===========================
+       RESPONSIVE — TABLET
+    =========================== */
+    @media (max-width: 900px) {
+      .unit-grid        { grid-template-columns: 1fr 1fr; }
+      .fasilitas-grid   { grid-template-columns: repeat(2, 1fr); }
+      .kpr-layout       { grid-template-columns: 1fr; }
+      .kontak-layout    { grid-template-columns: 1fr; }
+      .kpr-result-box   { position: static; }
+      .hero-inner       { grid-template-columns: 1fr; text-align: center; }
+      .hero-sub         { margin-inline: auto; }
+      .hero-actions     { justify-content: center; }
+      .hero-stats       { justify-content: center; }
+      .hero-visual      { display: none; }
+    }
+
+    /* ===========================
+       RESPONSIVE — MOBILE
+    =========================== */
+    @media (max-width: 620px) {
+      .unit-grid        { grid-template-columns: 1fr; }
+      .fasilitas-grid   { grid-template-columns: 1fr 1fr; }
+      .nav-links        { display: none; }
+      .nav-cta          { display: none; }
+      .nav-toggle       { display: flex; }
+      .form-row         { grid-template-columns: 1fr; }
+      .modal-spec-grid  { grid-template-columns: 1fr; }
+      .location-strip   { flex-direction: column; gap: 1rem; }
+      .footer-inner     { flex-direction: column; text-align: center; }
+      .footer-links     { justify-content: center; }
+      .hero-stats       { flex-direction: column; gap: 1rem; }
+    }
+
+    @media (max-width: 400px) {
+      .fasilitas-grid   { grid-template-columns: 1fr; }
+      .unit-actions     { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<header>
+  <nav id="navbar" role="navigation" aria-label="Menu utama">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="ALSKAR – Beranda">
+        <span class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L4 9v12h5v-7h6v7h5V9z"/>
+          </svg>
+        </span>
+        ALSKAR
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#hero" class="active">Beranda</a></li>
+        <li><a href="#tipe-unit">Tipe Unit</a></li>
+        <li><a href="#fasilitas">Fasilitas</a></li>
+        <li><a href="#simulasi-kpr">Simulasi KPR</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+
+      <a href="#kontak" class="btn btn-primary nav-cta" aria-label="Book Survey sekarang">Book Survey</a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Buka menu navigasi">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" role="menu">
+      <a href="#hero" role="menuitem">Beranda</a>
+      <a href="#tipe-unit" role="menuitem">Tipe Unit</a>
+      <a href="#fasilitas" role="menuitem">Fasilitas</a>
+      <a href="#simulasi-kpr" role="menuitem">Simulasi KPR</a>
+      <a href="#kontak" role="menuitem">Kontak</a>
+      <a href="#kontak" class="btn btn-primary">Book Survey</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero" aria-labelledby="hero-heading">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <span class="hero-badge">🌿 Kawasan Hijau Terpadu – Karawang</span>
+      <h1 class="hero-title" id="hero-heading">
+        Rumah Impian di<br><em>Alam Asri Karawang</em>
+      </h1>
+      <p class="hero-sub">
+        Hunian modern berkonsep green living, strategis dekat Tol Karawang Timur, dengan fasilitas lengkap untuk keluarga muda dan profesional urban.
+      </p>
+      <div class="hero-actions">
+        <a href="#tipe-unit" class="btn btn-accent">Lihat Tipe Unit</a>
+        <a href="#simulasi-kpr" class="btn btn-outline">Simulasi KPR</a>
+      </div>
+      <div class="hero-stats" role="list" aria-label="Statistik kawasan">
+        <div role="listitem">
+          <div class="hero-stat-num">300+</div>
+          <div class="hero-stat-label">Unit Tersedia</div>
+        </div>
+        <div role="listitem">
+          <div class="hero-stat-num">12 Ha</div>
+          <div class="hero-stat-label">Luas Kawasan</div>
+        </div>
+        <div role="listitem">
+          <div class="hero-stat-num">2024</div>
+          <div class="hero-stat-label">Siap Huni</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-card">
+        <p class="hero-card-title">Keunggulan ALSKAR</p>
+        <div class="hero-card-item">
+          <div class="hero-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="hero-card-name">One Gate System</div>
+            <div class="hero-card-desc">Keamanan 24 jam terpadu</div>
+          </div>
+        </div>
+        <div class="hero-card-item">
+          <div class="hero-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 1-13 1S2 10 2 10s5-2 6-3 9 1 9 1z"/></svg>
+          </div>
+          <div>
+            <div class="hero-card-name">Taman Hijau 30%</div>
+            <div class="hero-card-desc">RTH di setiap klaster</div>
+          </div>
+        </div>
+        <div class="hero-card-item">
+          <div class="hero-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <div class="hero-card-name">Akses Tol 5 Menit</div>
+            <div class="hero-card-desc">Tol Karawang Timur</div>
+          </div>
+        </div>
+        <div class="hero-card-item">
+          <div class="hero-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          </div>
+          <div>
+            <div class="hero-card-name">KPR Syariah & Konvensional</div>
+            <div class="hero-card-desc">Bekerjasama 7+ bank</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TIPE UNIT ===================== -->
+<section id="tipe-unit" aria-labelledby="unit-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Pilihan Unit</span>
+      <h2 class="section-title" id="unit-heading">Tipe Unit Unggulan</h2>
+      <p class="section-sub">Pilih hunian sesuai kebutuhan keluarga Anda — dari starter home hingga rumah keluarga besar.</p>
+    </div>
+
+    <div class="unit-grid">
+
+      <!-- Unit 1: Tipe 36/60 -->
+      <article class="unit-card" aria-label="Tipe 36/60">
+        <div class="unit-img" aria-hidden="true">
+          <div class="unit-illustration">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="80" width="120" height="60" fill="#6db48a"/>
+              <polygon points="30,80 100,30 170,80" fill="#2d7a4f"/>
+              <rect x="85" y="105" width="30" height="35" fill="#1f5a38"/>
+              <rect x="50" y="88" width="25" height="20" fill="#a8d5b8" rx="2"/>
+              <rect x="125" y="88" width="25" height="20" fill="#a8d5b8" rx="2"/>
+              <rect x="160" y="50" width="12" height="30" fill="#c8e6d5" rx="2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="unit-body">
+          <p class="unit-type-label">Tipe Starter</p>
+          <h3 class="unit-name">Tipe 36/60</h3>
+          <p class="unit-price">Mulai Rp 380 Juta <small>/ unit</small></p>
+          <ul class="unit-specs" role="list">
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+              2 Kamar Tidur
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M7 8h2V6H7v2zm2 14v-2H7v2h2zm10-2h-2v2h2v-2zm0-14v2h2V6h-2zm2 7h-2v2h2v-2zM7 18H5v2h2v-2zM5 8H3v2h2V8zm0 4H3v2h2v-2zm14-4v2h2V8h-2zM7 6V4H5v2h2zm6 0V4h-2v2h2zm4 0V4h-2v2h2zM5 16H3v2h2v-2zM3 6H1v2h2V6zM3 10H1v2h2v-2zm0 4H1v2h2v-2zm18-8h-2v2h2V6zm0 8h-2v2h2v-2zm0 4h-2v2h2v-2zm-4 4v-2h-2v2h2zm-4 0v-2h-2v2h2zm-4 0v-2H7v2h2zm0-14v2h2V8H9zm4 0v2h2V8h-2zm-4 4v2h2v-2H9zm4 0v2h2v-2h-2z"/></svg>
+              1 Kamar Mandi
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+              1 Carport
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+              LB 36 / LT 60 m²
+            </li>
+          </ul>
+          <div class="unit-actions">
+            <button class="btn btn-outline" onclick="openModal('tipe36')">Lihat Detail</button>
+            <a href="#simulasi-kpr" class="btn btn-primary">Simulasi KPR</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Unit 2: Tipe 45/72 FEATURED -->
+      <article class="unit-card featured" aria-label="Tipe 45/72 – Terlaris">
+        <span class="unit-badge">Terlaris</span>
+        <div class="unit-img" aria-hidden="true" style="background: linear-gradient(135deg, #b2d8c3 0%, #80c4a0 100%);">
+          <div class="unit-illustration">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="30" y="75" width="140" height="65" fill="#4a9e70"/>
+              <polygon points="20,75 100,20 180,75" fill="#2d7a4f"/>
+              <rect x="85" y="100" width="30" height="40" fill="#1f5a38"/>
+              <rect x="40" y="83" width="28" height="22" fill="#a8d5b8" rx="2"/>
+              <rect x="132" y="83" width="28" height="22" fill="#a8d5b8" rx="2"/>
+              <rect x="152" y="42" width="14" height="33" fill="#c8e6d5" rx="2"/>
+              <rect x="40" y="118" width="50" height="5" fill="#1f5a38" rx="2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="unit-body">
+          <p class="unit-type-label">Tipe Keluarga</p>
+          <h3 class="unit-name">Tipe 45/72</h3>
+          <p class="unit-price">Mulai Rp 520 Juta <small>/ unit</small></p>
+          <ul class="unit-specs" role="list">
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+              3 Kamar Tidur
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M7 8h2V6H7v2zm2 14v-2H7v2h2zm10-2h-2v2h2v-2zm0-14v2h2V6h-2zm2 7h-2v2h2v-2zM7 18H5v2h2v-2zM5 8H3v2h2V8zm0 4H3v2h2v-2zm14-4v2h2V8h-2zM7 6V4H5v2h2zm6 0V4h-2v2h2zm4 0V4h-2v2h2zM5 16H3v2h2v-2zM3 6H1v2h2V6zM3 10H1v2h2v-2zm0 4H1v2h2v-2zm18-8h-2v2h2V6zm0 8h-2v2h2v-2zm0 4h-2v2h2v-2zm-4 4v-2h-2v2h2zm-4 0v-2h-2v2h2zm-4 0v-2H7v2h2zm0-14v2h2V8H9zm4 0v2h2V8h-2zm-4 4v2h2v-2H9zm4 0v2h2v-2h-2z"/></svg>
+              2 Kamar Mandi
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+              1 Carport
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+              LB 45 / LT 72 m²
+            </li>
+          </ul>
+          <div class="unit-actions">
+            <button class="btn btn-outline" onclick="openModal('tipe45')">Lihat Detail</button>
+            <a href="#simulasi-kpr" class="btn btn-primary">Simulasi KPR</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Unit 3: Tipe 60/90 -->
+      <article class="unit-card" aria-label="Tipe 60/90">
+        <div class="unit-img" aria-hidden="true" style="background: linear-gradient(135deg, #d4ead9 0%, #b0d8be 100%);">
+          <div class="unit-illustration">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="70" width="160" height="70" fill="#5aac7a"/>
+              <polygon points="10,70 100,15 190,70" fill="#2d7a4f"/>
+              <rect x="83" y="100" width="34" height="40" fill="#1f5a38"/>
+              <rect x="30" y="79" width="32" height="24" fill="#a8d5b8" rx="2"/>
+              <rect x="138" y="79" width="32" height="24" fill="#a8d5b8" rx="2"/>
+              <rect x="30" y="115" width="60" height="5" fill="#1f5a38" rx="2"/>
+              <rect x="155" y="38" width="16" height="32" fill="#c8e6d5" rx="2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="unit-body">
+          <p class="unit-type-label">Tipe Premium</p>
+          <h3 class="unit-name">Tipe 60/90</h3>
+          <p class="unit-price">Mulai Rp 750 Juta <small>/ unit</small></p>
+          <ul class="unit-specs" role="list">
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+              4 Kamar Tidur
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M7 8h2V6H7v2zm2 14v-2H7v2h2zm10-2h-2v2h2v-2zm0-14v2h2V6h-2zm2 7h-2v2h2v-2zM7 18H5v2h2v-2zM5 8H3v2h2V8zm0 4H3v2h2v-2zm14-4v2h2V8h-2zM7 6V4H5v2h2zm6 0V4h-2v2h2zm4 0V4h-2v2h2zM5 16H3v2h2v-2zM3 6H1v2h2V6zM3 10H1v2h2v-2zm0 4H1v2h2v-2zm18-8h-2v2h2V6zm0 8h-2v2h2v-2zm0 4h-2v2h2v-2zm-4 4v-2h-2v2h2zm-4 0v-2h-2v2h2zm-4 0v-2H7v2h2zm0-14v2h2V8H9zm4 0v2h2V8h-2zm-4 4v2h2v-2H9zm4 0v2h2v-2h-2z"/></svg>
+              3 Kamar Mandi
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+              2 Carport
+            </li>
+            <li class="spec-item" role="listitem">
+              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+              LB 60 / LT 90 m²
+            </li>
+          </ul>
+          <div class="unit-actions">
+            <button class="btn btn-outline" onclick="openModal('tipe60')">Lihat Detail</button>
+            <a href="#simulasi-kpr" class="btn btn-primary">Simulasi KPR</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MODAL UNIT DETAILS ===================== -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Tutup detail unit">✕</button>
+    <h3 class="modal-title" id="modalTitle">–</h3>
+    <p class="modal-price" id="modalPrice">–</p>
+    <div class="modal-spec-grid" id="modalSpecs"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-actions">
+      <a href="#simulasi-kpr" class="btn btn-primary" onclick="closeModal()">Simulasi KPR</a>
+      <a href="#kontak" class="btn btn-outline" onclick="closeModal()">Book Survey</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FASILITAS ===================== -->
+<section id="fasilitas" aria-labelledby="fasilitas-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Kawasan</span>
+      <h2 class="section-title" id="fasilitas-heading">Fasilitas Unggulan</h2>
+      <p class="section-sub">Dirancang untuk kenyamanan, keamanan, dan kualitas hidup yang lebih baik setiap hari.</p>
+    </div>
+
+    <div class="fasilitas-grid">
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">One Gate System</h3>
+        <p class="fasilitas-desc">Akses masuk tunggal dengan CCTV dan petugas keamanan berjadwal 24 jam penuh.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 1-13 1S2 10 2 10s5-2 6-3 9 1 9 1z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">Taman Hijau Klaster</h3>
+        <p class="fasilitas-desc">Ruang terbuka hijau 30% dari total lahan untuk area bermain anak dan jogging track.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3C6.48 3 2 7.48 2 13s4.48 10 10 10 10-4.48 10-10S17.52 3 12 3zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">Jogging Track</h3>
+        <p class="fasilitas-desc">Jalur lari 1,2 km yang mengelilingi kawasan dengan penerangan LED hemat energi.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">Dekat Tol Karawang Timur</h3>
+        <p class="fasilitas-desc">Hanya 5 menit ke pintu tol, akses mudah ke Jakarta, Bekasi, dan kawasan industri.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">Masjid Kawasan</h3>
+        <p class="fasilitas-desc">Masjid representatif di tengah kawasan dengan kapasitas 300 jamaah.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 16v2h16v-2H4zm0-4v2h16v-2H4zm0-4v2h16V8H4zm0-4v2h16V4H4z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">Area Komersial</h3>
+        <p class="fasilitas-desc">Ruko dan mini market di dalam kawasan untuk memenuhi kebutuhan sehari-hari.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">Kolam Renang Komunal</h3>
+        <p class="fasilitas-desc">Kolam renang anak dan dewasa tersedia di klaster utama kawasan.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+        </div>
+        <h3 class="fasilitas-name">Fiber Optic & Smart Home</h3>
+        <p class="fasilitas-desc">Jaringan internet fiber tersedia di seluruh kawasan, ready smart home integration.</p>
+      </div>
+
+    </div>
+
+    <div class="location-strip" aria-label="Jarak ke fasilitas publik terdekat">
+      <p class="location-strip-title">📍 Jarak ke Fasilitas Publik</p>
+      <ul class="location-items" role="list">
+        <li class="location-item" role="listitem">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Tol Karawang Timur 5 mnt
+        </li>
+        <li class="location-item" role="listitem">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          RS Karawang 10 mnt
+        </li>
+        <li class="location-item" role="listitem">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Karawang Central Mall 8 mnt
+        </li>
+        <li class="location-item" role="listitem">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          SD/SMP Negeri 3 mnt
+        </li>
+        <li class="location-item" role="listitem">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Stasiun Karawang 12 mnt
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== SIMULASI KPR ===================== -->
+<section id="simulasi-kpr" aria-labelledby="kpr-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Kalkulator</span>
+      <h2 class="section-title" id="kpr-heading">Simulasi KPR Instan</h2>
+      <p class="section-sub">Hitung perkiraan cicilan bulanan Anda sekarang tanpa perlu menghubungi sales terlebih dahulu.</p>
+    </div>
+
+    <div class="kpr-layout">
+      <div class="kpr-form-box">
+        <div class="form-group">
+          <label for="kprHarga">Harga Rumah (Rp)</label>
+          <div class="input-prefix">
+            <span class="prefix">Rp</span>
+            <input type="number" id="kprHarga" min="100000000" step="5000000" value="520000000" placeholder="520000000" aria-label="Masukkan harga rumah" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="kprDP">Uang Muka / DP (%)</label>
+          <input type="number" id="kprDP" min="10" max="90" step="1" value="20" placeholder="20" aria-label="Persentase uang muka" />
+        </div>
+        <div class="form-group">
+          <label for="kprBunga">Suku Bunga / Tahun (%)</label>
+          <input type="number" id="kprBunga" min="1" max="30" step="0.1" value="10.5" placeholder="10.5" aria-label="Suku bunga per tahun" />
+        </div>
+        <div class="form-group">
+          <label for="kprTenor">Tenor (Tahun)</label>
+          <select id="kprTenor" aria-label="Pilih tenor KPR">
+            <option value="5">5 Tahun</option>
+            <option value="10">10 Tahun</option>
+            <option value="15" selected>15 Tahun</option>
+            <option value="20">20 Tahun</option>
+            <option value="25">25 Tahun</option>
+            <option value="30">30 Tahun</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="hitungKPR()">
+          Hitung Cicilan
+        </button>
+      </div>
+
+      <div class="kpr-result-box" id="kprResult" aria-live="polite" aria-atomic="true">
+        <p class="kpr-result-label">Estimasi Cicilan Per Bulan</p>
+        <p class="kpr-result-main" id="cicilanBulanan">Rp 0</p>
+        <p class="kpr-result-sub" id="cicilanSub">Masukkan data di sebelah kiri, lalu klik "Hitung Cicilan"</p>
+
+        <div class="kpr-breakdown" id="kprBreakdown">
+          <div class="kpr-breakdown-item">
+            <span class="item-label">Harga Rumah</span>
+            <span class="item-value" id="br-harga">–</span>
+          </div>
+          <div class="kpr-breakdown-item">
+            <span class="item-label">Uang Muka (DP)</span>
+            <span class="item-value" id="br-dp">–</span>
+          </div>
+          <div class="kpr-breakdown-item">
+            <span class="item-label">Pokok Pinjaman</span>
+            <span class="item-value" id="br-pokok">–</span>
+          </div>
+          <div class="kpr-breakdown-item">
+            <span class="item-label">Suku Bunga</span>
+            <span class="item-value" id="br-bunga">–</span>
+          </div>
+          <div class="kpr-breakdown-item">
+            <span class="item-label">Tenor</span>
+            <span class="item-value" id="br-tenor">–</span>
+          </div>
+        </div>
+
+        <div class="kpr-disclaimer" role="note" aria-label="Disclaimer kalkulasi KPR">
+          <strong>⚠️ Disclaimer:</strong> Angka ini merupakan <strong>estimasi</strong> berdasarkan formula anuitas dan belum memperhitungkan biaya administrasi, asuransi, atau persyaratan bank. Silakan hubungi bank atau agen properti kami untuk simulasi resmi dan akurat.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KONTAK & SURVEY FORM ===================== -->
+<section id="kontak" aria-labelledby="kontak-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Kontak & Survey</span>
+      <h2 class="section-title" id="kontak-heading">Jadwalkan Kunjungan Anda</h2>
+      <p class="section-sub">Tim marketing kami siap memandu Anda secara langsung di Marketing Gallery ALSKAR.</p>
+    </div>
+
+    <div class="kontak-layout">
+      <div class="kontak-info">
+        <h3 class="kontak-info-title">Informasi Kontak Resmi</h3>
+
+        <div class="kontak-item">
+          <div class="kontak-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <p class="kontak-item-title">Marketing Gallery</p>
+            <p class="kontak-item-value">Jl. Alam Asri Raya No. 1, Karawang Timur,<br>Kabupaten Karawang, Jawa Barat 41314</p>
+          </div>
+        </div>
+
+        <div class="kontak-item">
+          <div class="kontak-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <p class="kontak-item-title">Telepon / WhatsApp</p>
+            <p class="kontak-item-value">+62 812-3456-7890</p>
+          </div>
+        </div>
+
+        <div class="kontak-item">
+          <div class="kontak-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <p class="kontak-item-title">Email</p>
+            <p class="kontak-item-value">info@alskarkarawang.co.id</p>
+          </div>
+        </div>
+
+        <div class="kontak-item">
+          <div class="kontak-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+          </div>
+          <div>
+            <p class="kontak-item-title">Jam Operasional</p>
+            <p class="kontak-item-value">Setiap hari 08.00 – 17.00 WIB</p>
+          </div>
+        </div>
+
+        <div class="kontak-hours">
+          <strong>🏠 Marketing Gallery</strong> buka setiap hari termasuk akhir pekan dan hari libur nasional. Tim kami siap melayani kunjungan dan konsultasi tanpa biaya.
+        </div>
+      </div>
+
+      <!-- Survey Form -->
+      <div class="survey-form-box">
+        <h3 class="survey-form-title">Form Booking Survey Lokasi</h3>
+        <p class="survey-form-sub">Isi formulir berikut dan tim kami akan menghubungi Anda dalam 1×24 jam.</p>
+
+        <form id="surveyForm" novalidate aria-label="Formulir booking survey lokasi">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nama">Nama Lengkap <span aria-hidden="true" style="color:var(--color-danger)">*</span></label>
+              <input type="text" id="nama" name="nama" required placeholder="Budi Santoso" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="telepon">No. Telepon / WA <span aria-hidden="true" style="color:var(--color-danger)">*</span></label>
+              <input type="tel" id="telepon" name="telepon" required placeholder="08xxxxxxxxxx" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Alamat Email</label>
+            <input type="email" id="email" name="email" placeholder="email@contoh.com" autocomplete="email" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tipeMinat">Tipe Unit yang Diminati</label>
+              <select id="tipeMinat" name="tipeMinat">
+                <option value="">— Pilih Tipe Unit —</option>
+                <option value="36">Tipe 36/60 (Rp 380 Juta)</option>
+                <option value="45">Tipe 45/72 (Rp 520 Juta)</option>
+                <option value="60">Tipe 60/90 (Rp 750 Juta)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="tanggal">Tanggal Kunjungan yang Diinginkan</label>
+              <input type="date" id="tanggal" name="tanggal" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pesan">Pesan / Pertanyaan</label>
+            <textarea id="pesan" name="pesan" placeholder="Tulis pertanyaan atau kebutuhan khusus Anda..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+            Kirim Permohonan Survey
+          </button>
+
+          <div class="form-success" id="formSuccess" role="alert" aria-live="assertive">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Terima kasih! Tim kami akan menghubungi Anda dalam 1×24 jam.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-logo">🌿 ALSKAR</span>
+      <nav class="footer-links" aria-label="Tautan footer">
+        <a href="#tipe-unit">Tipe Unit</a>
+        <a href="#fasilitas">Fasilitas</a>
+        <a href="#simulasi-kpr">Simulasi KPR</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+    </div>
+    <p class="footer-copy">
+      © 2024 Perumahan Alam Asri Karawang (ALSKAR). Semua harga dan informasi bersifat estimasi dan dapat berubah sewaktu-waktu. Hubungi tim marketing untuk informasi terkini.
+    </p>
+  </div>
+</footer>
+
+<!-- ===================== WHATSAPP FLOATING ===================== -->
+<a
+  href="https://wa.me/6281234567890?text=Halo%20ALSKAR%2C%20saya%20ingin%20informasi%20lebih%20lanjut%20mengenai%20unit%20yang%20tersedia."
+  class="wa-float"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat via WhatsApp dengan tim ALSKAR"
+>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+  Chat WhatsApp
+</a>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+  // ---- Navbar scroll shadow ----
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // ---- Active nav link on scroll ----
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const observerOpts = { threshold: 0.35 };
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, observerOpts);
+  sections.forEach(s => sectionObserver.observe(s));
+
+  // ---- Mobile menu toggle ----
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  navToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+
+  // Close mobile menu when a link is clicked
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ---- Unit Detail Modal ----
+  const unitData = {
+    tipe36: {
+      title: 'Tipe 36/60 – Starter Home',
+      price: 'Mulai Rp 380 Juta / unit',
+      desc: 'Hunian compact nan fungsional untuk keluarga kecil dan pasangan muda. Didesain dengan konsep open-plan untuk memaksimalkan kesan luas. Cocok sebagai investasi properti pertama Anda di Karawang.',
+      specs: [
+        { label: 'Luas Bangunan', value: '36 m²' },
+        { label: 'Luas Tanah', value: '60 m²' },
+        { label: 'Kamar Tidur', value: '2 KT' },
+        { label: 'Kamar Mandi', value: '1 KM' },
+        { label: 'Carport', value: '1 Unit' },
+        { label: 'Ketersediaan', value: '85 Unit' },
+      ]
+    },
+    tipe45: {
+      title: 'Tipe 45/72 – Family Home',
+      price: 'Mulai Rp 520 Juta / unit',
+      desc: 'Pilihan terpopuler di ALSKAR. Memiliki ruang keluarga yang luas, dapur terpisah, dan halaman belakang mini. Ideal untuk keluarga muda yang membutuhkan ruang tumbuh bersama.',
+      specs: [
+        { label: 'Luas Bangunan', value: '45 m²' },
+        { label: 'Luas Tanah', value: '72 m²' },
+        { label: 'Kamar Tidur', value: '3 KT' },
+        { label: 'Kamar Mandi', value: '2 KM' },
+        { label: 'Carport', value: '1 Unit' },
+        { label: 'Ketersediaan', value: '120 Unit' },
+      ]
+    },
+    tipe60: {
+      title: 'Tipe 60/90 – Premium Home',
+      price: 'Mulai Rp 750 Juta / unit',
+      desc: 'Hunian premium dengan desain modern minimalis. Dilengkapi 2 carport, ruang keluarga double, dan kamar tidur utama dengan walk-in closet. Pilihan tepat untuk keluarga besar dan profesional sukses.',
+      specs: [
+        { label: 'Luas Bangunan', value: '60 m²' },
+        { label: 'Luas Tanah', value: '90 m²' },
+        { label: 'Kamar Tidur', value: '4 KT' },
+        { label: 'Kamar Mandi', value: '3 KM' },
+        { label: 'Carport', value: '2 Unit' },
+        { label: 'Ketersediaan', value: '60 Unit' },
+      ]
+    }
+  };
+
+  const modalOverlay = document.getElementById('modalOverlay');
+
+  function openModal(type) {
+    const data = unitData[type];
+    if (!data) return;
+
+    document.getElementById('modalTitle').textContent = data.title;
+    document.getElementById('modalPrice').textContent = data.price;
+    document.getElementById('modalDesc').textContent = data.desc;
+
+    const specsEl = document.getElementById('modalSpecs');
+    specsEl.innerHTML = data.specs.map(s => `
+      <div class="modal-spec-item">
+        <div class="label">${s.label}</div>
+        <div class="value">${s.value}</div>
+      </div>
+    `).join('');
+
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Focus management for accessibility
+    setTimeout(() => {
+      const closeBtn = modalOverlay.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    }, 50);
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal on overlay click
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  // Close modal on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+  });
+
+  // ---- KPR Calculator ----
+  function formatRupiah(angka) {
+    return 'Rp ' + Math.round(angka).toLocaleString('id-ID');
+  }
+
+  function hitungKPR() {
+    const harga  = parseFloat(document.getElementById('kprHarga').value)  || 0;
+    const dpPct  = parseFloat(document.getElementById('kprDP').value)     || 0;
+    const bunga  = parseFloat(document.getElementById('kprBunga').value)  || 0;
+    const tenor  = parseInt(document.getElementById('kprTenor').value)    || 15;
+
+    if (harga <= 0) {
+      alert('Masukkan harga rumah yang valid.');
+      return;
+    }
+
+    const dp       = harga * (dpPct / 100);
+    const pokok    = harga - dp;
+    const r        = (bunga / 100) / 12;   // suku bunga bulanan
+    const n        = tenor * 12;            // jumlah cicilan
+
+    let cicilan;
+    if (r === 0) {
+      cicilan = pokok / n;
+    } else {
+      cicilan = pokok * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    }
+
+    document.getElementById('cicilanBulanan').textContent = formatRupiah(cicilan);
+    document.getElementById('cicilanSub').textContent =
+      `Tenor ${tenor} tahun (${n} bulan) • Bunga ${bunga}%/tahun`;
+
+    document.getElementById('br-harga').textContent = formatRupiah(harga);
+    document.getElementById('br-dp').textContent    = `${formatRupiah(dp)} (${dpPct}%)`;
+    document.getElementById('br-pokok').textContent = formatRupiah(pokok);
+    document.getElementById('br-bunga').textContent = `${bunga}% per tahun`;
+    document.getElementById('br-tenor').textContent = `${tenor} tahun`;
+  }
+
+  // Auto-calculate on input change
+  ['kprHarga', 'kprDP', 'kprBunga', 'kprTenor'].forEach(id => {
+    document.getElementById(id).addEventListener('input', hitungKPR);
+    document.getElementById(id).addEventListener('change', hitungKPR);
+  });
+
+  // Initial calculation
+  hitungKPR();
+
+  // ---- Survey Form ----
+  document.getElementById('surveyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nama = document.getElementById('nama').value.trim();
+    const telp = document.getElementById('telepon').value.trim();
+
+    if (!nama) {
+      document.getElementById('nama').focus();
+      alert('Nama lengkap wajib diisi.');
+      return;
+    }
+    if (!telp) {
+      document.getElementById('telepon').focus();
+      alert('Nomor telepon wajib diisi.');
+      return;
+    }
+
+    // Simulate form submission
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Mengirim...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('formSuccess').classList.add('show');
+      this.reset();
+      btn.textContent = 'Kirim Permohonan Survey';
+      btn.disabled = false;
+      document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 900);
+  });
+</script>
+
+</body>
+</html>
